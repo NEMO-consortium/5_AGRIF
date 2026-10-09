@@ -12,10 +12,6 @@ This README.md serves as an Table of Contents.
 - [The safe way: use a Docker container](chapters/Docker.md)
 - [Install NEMO v5.0](chapters/Install_NEMO.md)
 - [Build test cases with SETTE](chapters/Sette.md)
-
-
-
- 
  
  # AGRIF
  ## Defining the nesting hierarchy
@@ -26,6 +22,70 @@ When using AGRIF, the files corresponding to each nested model will be named wit
 The nomenclature of each child grid model namelists, configuration files, forcing fields need to follow this rule (e.g. `1_namelist_cfg`, `1_namelist_ref`, `1_domain_cfg.nc`, `1_data_1m_salinity_nomask.nc`, `1_context_nemo.xml`, ...). The same is expected for the ouptut files (e.g. `1_ocean.output`, `1_AGRIF_DEMO_LONG_5d_00010101_00010331_grid_T.nc, ...`).
 
 For a general overview of AGRIF you can visit the AGRIF section in the [NEMO user guide](https://sites.nemo-ocean.io/user-guide/zooms.html).
+
+## Set-up the experiment (EXPLONG)
+
+If you have followed the [NEMO Basics](https://github.com/NEMO-consortium/0_NEMO_basics) tutorial, you will already have NEMO downloaded and installed. Now follow these steps to compile AGRIF in your NEMO v5.0.2 folder. Use the *makenemo* script to compile the AGRIF_DEMO configuration:
+
+```bash
+./makenemo -m MY_COMPUTER -r AGRIF_DEMO -n AGRIF_demonstrator -j 8
+```
+
+> **Note**: If you have decided to use an auto arch file, you will replace MY_COMPUTER with auto
+
+This command compiles NEMO and stores the build files in the *cfgs/GYRE_DEMO/BLD* folder. 
+
+In particular, it creates an executable **cfgs/GYRE_DEMO/BLD/bin/nemo.exe** that will be used to run the model.
+
+If you have not done so already, copy EXP00 to create EXP01
+```
+cp cfgs/GYRE_DEMO/EXP00 cfgs/GYRE_DEMO/EXP01
+```
+
+Test your installation by running the model (or by submitting a job as is suggested in the [NEMO Basics](https://github.com/NEMO-consortium/0_NEMO_basics) tutorial):
+```bash
+cd cfgs/GYRE_DEMO/EXP01
+./nemo &
+```
+You can follow how the simulation goes by printing the current iteration with `cat time.step`. 
+When the iteration reaches _4320_, the simulation is finished. 
+Results are stored in _GYRE\_\*\_grid\_\*.nc_ files.
+
+We are now going to create a new experiment to activate the GM parameterisation and spin-up the model for 10 years:
+1. Navigate and return to the configuration top-level folder: `cd .. & ls`. At this point, the folder structure should be as follows:
+    ```bash
+    BLD cpp_GYRE_DEMO.fcm  EXP00 EXP01  MY_SRC  WORK
+    ```
+2. Copy-paste the _EXP00_ folder which contains links and configuration files with default settings to run the configuration.
+    ```bash
+    cp -r EXP00 EXPSPIN
+    cd EXPSPIN
+    ln -sf ../BLD/bin/nemo.exe nemo
+    ``` 
+3. Now open the **namelist_cfg** file and edit the _&namrun_ section in order to have the following settings:
+    ```vi
+       nn_it000  = 1       !
+       nn_itend  = 21600   !
+       nn_leapy  = 30      !
+       nn_stock  = 10800   !
+       nn_write  = 30      !
+    ```
+4.  Still in the **namelist_cfg** file, add a new section after the _&namtra_ldf_ section, in order to activate the GM parameterisation:
+    ```vi
+    !-----------------------------------------------------------------------
+    &namtra_eiv    !   eddy induced velocity param.                     
+    !-----------------------------------------------------------------------
+       ln_ldfeiv   = .true.        ! use eddy induced velocity parameterization
+    /
+    ```
+    This activates the default specification of the GM coefficient ($$\kappa_{gm}$$) which is constent all over the ocean domain with a value of $$2 000$$ $$m^2 s^{-1}$$.
+
+The spin-up is now configured. We have kept the default time-step value `rn_Dt = 14400.` in the namelist, wich corresponds to a 4 hours time-stepping between each iteration.
+The simulation will then last 10 years (this can be easily changed by setting the final iteration _nn_itend_ accordingly).
+
+Before running the model, we will add extra variables using XIOS.
+
+========================
 
 We can use the  `LONG` example available in AGRIF_DEMO to go through the required AGRIF specifications.
 
