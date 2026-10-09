@@ -33,13 +33,13 @@ If you have followed the [NEMO Basics](https://github.com/NEMO-consortium/0_NEMO
 
 > **Note**: If you have decided to use an auto arch file, you will replace MY_COMPUTER with auto
 
-This command compiles NEMO and stores the build files in the *cfgs/GYRE_DEMO/BLD* folder. 
+This command compiles NEMO with AGRIF and stores the build files in the *cfgs/AGRIF_demonstrator/BLD* folder. 
 
-In particular, it creates an executable **cfgs/GYRE_DEMO/BLD/bin/nemo.exe** that will be used to run the model.
+In particular, it creates an executable **cfgs/AGRIF_demonstrator/BLD/bin/nemo.exe** that will be used to run the model.
 
-If you have not done so already, copy EXP00 to create EXP01
+If you have not done so already, copy EXP00 to create EXPLONG
 ```
-cp cfgs/GYRE_DEMO/EXP00 cfgs/GYRE_DEMO/EXP01
+cp cfgs/AGRIF_demonstrator/EXP00 cfgs/AGRIF_demonstrator/EXPLONG
 ```
 
 Test your installation by running the model (or by submitting a job as is suggested in the [NEMO Basics](https://github.com/NEMO-consortium/0_NEMO_basics) tutorial):
