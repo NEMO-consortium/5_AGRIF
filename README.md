@@ -39,12 +39,12 @@ In particular, it creates an executable **cfgs/AGRIF_demonstrator/BLD/bin/nemo.e
 
 If you have not done so already, copy EXP00 to create EXPLONG
 ```
-cp cfgs/AGRIF_demonstrator/EXP00 cfgs/AGRIF_demonstrator/EXPLONG
+cp -r cfgs/AGRIF_demonstrator/EXP00 cfgs/AGRIF_demonstrator/EXPLONG
 ```
 
 Test your installation by running the model (or by submitting a job as is suggested in the [NEMO Basics](https://github.com/NEMO-consortium/0_NEMO_basics) tutorial):
 ```bash
-cd cfgs/GYRE_DEMO/EXP01
+cd cfgs/AGRIF_demonstrator/EXPLONG
 ./nemo &
 ```
 You can follow how the simulation goes by printing the current iteration with `cat time.step`. 
