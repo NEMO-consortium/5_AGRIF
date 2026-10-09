@@ -42,46 +42,12 @@ If you have not done so already, copy EXP00 to create EXPLONG
 cp -r cfgs/AGRIF_demonstrator/EXP00 cfgs/AGRIF_demonstrator/EXPLONG
 ```
 
+
+========================
 Test your installation by running the model (or by submitting a job as is suggested in the [NEMO Basics](https://github.com/NEMO-consortium/0_NEMO_basics) tutorial):
 ```bash
 cd cfgs/AGRIF_demonstrator/EXPLONG
-./nemo &
 ```
-You can follow how the simulation goes by printing the current iteration with `cat time.step`. 
-When the iteration reaches _4320_, the simulation is finished. 
-Results are stored in _GYRE\_\*\_grid\_\*.nc_ files.
-
-We are now going to create a new experiment to activate the GM parameterisation and spin-up the model for 10 years:
-1. Navigate and return to the configuration top-level folder: `cd .. & ls`. At this point, the folder structure should be as follows:
-    ```bash
-    BLD cpp_GYRE_DEMO.fcm  EXP00 EXP01  MY_SRC  WORK
-    ```
-2. Copy-paste the _EXP00_ folder which contains links and configuration files with default settings to run the configuration.
-    ```bash
-    cp -r EXP00 EXPSPIN
-    cd EXPSPIN
-    ln -sf ../BLD/bin/nemo.exe nemo
-    ``` 
-3. Now open the **namelist_cfg** file and edit the _&namrun_ section in order to have the following settings:
-    ```vi
-       nn_it000  = 1       !
-       nn_itend  = 21600   !
-       nn_leapy  = 30      !
-       nn_stock  = 10800   !
-       nn_write  = 30      !
-    ```
-4.  Still in the **namelist_cfg** file, add a new section after the _&namtra_ldf_ section, in order to activate the GM parameterisation:
-    ```vi
-    !-----------------------------------------------------------------------
-    &namtra_eiv    !   eddy induced velocity param.                     
-    !-----------------------------------------------------------------------
-       ln_ldfeiv   = .true.        ! use eddy induced velocity parameterization
-    /
-    ```
-    This activates the default specification of the GM coefficient ($$\kappa_{gm}$$) which is constent all over the ocean domain with a value of $$2 000$$ $$m^2 s^{-1}$$.
-
-The spin-up is now configured. We have kept the default time-step value `rn_Dt = 14400.` in the namelist, wich corresponds to a 4 hours time-stepping between each iteration.
-The simulation will then last 10 years (this can be easily changed by setting the final iteration _nn_itend_ accordingly).
 
 Before running the model, we will add extra variables using XIOS.
 
