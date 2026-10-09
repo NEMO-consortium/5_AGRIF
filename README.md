@@ -19,13 +19,13 @@ This README.md serves as an Table of Contents.
  
  # AGRIF
  ## Defining the nesting hierarchy
-When using AGRIF, the files correspondent to each nested model will be named with a prefix according to the hierarchy of the nesting. For this test case there is the global model with no prefix, and the subsequence of nested experiments are:
+When using AGRIF, the files corresponding to each nested model will be named with a prefix according to the hierarchy of the nesting. For this demonstrator, we use ORCA2 as the parent configuration, and the subsequent nested experiments are:
 1= AGRIF domain nested in the global model with the same resolution as the parent (1:1 ratio).
 2= AGRIF domain nested in the global model with a refinement of 4 (1:4)
 3= AGRIF subdomain nested in model 2 with a refinement of 3 (1:3).
-The nomenclature of each model namelists, configuration files, forcing fields need to follow this rule (e.g. `1_namelist_cfg`, `1_namelist_ref`, `1_domain_cfg.nc`, `1_data_1m_salinity_nomask.nc`, `1_context_nemo.xml`, ...). The same is expected for the ouptut files (e.g. `1_ocean.output`, `1_AGRIF_DEMO_LONG_5d_00010101_00010331_grid_T.nc, ...`).
+The nomenclature of each child grid model namelists, configuration files, forcing fields need to follow this rule (e.g. `1_namelist_cfg`, `1_namelist_ref`, `1_domain_cfg.nc`, `1_data_1m_salinity_nomask.nc`, `1_context_nemo.xml`, ...). The same is expected for the ouptut files (e.g. `1_ocean.output`, `1_AGRIF_DEMO_LONG_5d_00010101_00010331_grid_T.nc, ...`).
 
-For a general overview of AGRIF you can visit the [AGRIF user guide](https://sites.nemo-ocean.io/user-guide/zooms.html).
+For a general overview of AGRIF you can visit the AGRIF section in the [NEMO user guide](https://sites.nemo-ocean.io/user-guide/zooms.html).
 
 We can use the  `LONG` example available in AGRIF_DEMO to go through the required AGRIF specifications.
 
