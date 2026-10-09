@@ -1,4 +1,4 @@
-# AGRIF in NEMO v5
+# AGRIF journey in NEMO v5
 <p align="center">
   <img src="figures/AGRIF_DEMO_v4.2_no_cap.png" />
 </p>
