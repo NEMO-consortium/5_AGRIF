@@ -3,12 +3,12 @@
 - [The safe way: use a Docker container](Docker.md)
 
 
-# Downloading and compiling NEMO 5.0.1
+# Downloading and compiling NEMO 5.0.2
 
-Downloading NEMO 5.0.1.
-https://forge.nemo-ocean.eu/nemo/nemo/-/releases/5.0.1
+Downloading NEMO 5.0.2.
+https://forge.nemo-ocean.eu/nemo/nemo/-/releases/5.0.2
  
-#### 1.0) Download the Nemo code from GitLab, this can be done 'checking out' the 5.0 or 5.0.1 release from GitLab as
+#### 1.0) Download the Nemo code from GitLab, this can be done 'checking out' the 5.0 or 5.0.2 release from GitLab as
 
 ```shell
 git clone --branch 5.0   https://forge.nemo-ocean.eu/nemo/nemo.git nemo-5.0
@@ -16,7 +16,7 @@ rm -rf $(find . -iname .gitlab)
 rm -rf $(find . -iname .gitlab-ci)
 ```
 ```shell
-git clone --branch 5.0.1 https://forge.nemo-ocean.eu/nemo/nemo.git nemo-5.0.1
+git clone --branch 5.0.1 https://forge.nemo-ocean.eu/nemo/nemo.git nemo-5.0.2
 rm -rf $(find . -iname .gitlab)
 rm -rf $(find . -iname .gitlab-ci)
 ```
